@@ -1,803 +1,408 @@
-<!DOCTYPE html><html lang="de"><head>
-
+<!DOCTYPE html>
+<html lang="de">
+<head>
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>HEISSI LUFT - Official Store</title>
-
     <script src="https://cdn.tailwindcss.com"></script>
-
     <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
-
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
-
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-
     <script src="https://unpkg.com/lucide@latest"></script>
-
     <style>
-
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
-
         
-
         body { font-family: 'Inter', sans-serif; }
-
         .font-mono { font-family: 'Space Mono', monospace; }
-
         
-
         @keyframes marquee {
-
           0% { transform: translateX(0); }
-
           100% { transform: translateX(-50%); }
-
         }
-
         .animate-marquee {
-
           animation: marquee 20s linear infinite;
-
         }
-
         .brutalist-card {
-
           border: 2px solid black;
-
           box-shadow: 6px 6px 0px 0px rgba(0,0,0,1);
-
           transition: all 0.2s ease;
-
         }
-
         .brutalist-card:hover {
-
           box-shadow: 10px 10px 0px 0px rgba(0,0,0,1);
-
           transform: translate(-2px, -2px);
-
         }
-
         /* Custom scrollbar for raw feel */
-
         ::-webkit-scrollbar {
-
             width: 10px;
-
         }
-
         ::-webkit-scrollbar-track {
-
             background: #f0f0f0;
-
         }
-
         ::-webkit-scrollbar-thumb {
-
             background: #000;
-
             border: 2px solid #f0f0f0;
-
         }
-
-    </style></head><body class="bg-[#f0f0f0] text-black selection:bg-pink-400">
-
+    </style>
+</head>
+<body class="bg-[#f0f0f0] text-black selection:bg-pink-400">
     <div id="root"></div>
 
-
-
     <script type="text/babel">
-
         const { useState, useEffect } = React;
-
         const { ShoppingBag, Star, Menu, X, Flame, ArrowRight, Sparkles } = lucide;
 
-
-
         // Custom Icon wrapper
-
         const Icon = ({ name, size = 24, className, strokeWidth = 2 }) => {
-
             if (name === 'Flame') return <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-2.246-3.646-2.5-4.5A3.5 3.5 0 0 1 12 3c2.755 0 2.455 1.126 2.5 4.5.024 1.8.152 2.952.5 3.5a2.5 2.5 0 0 0 2 2.5c1.178.02 1.5-1.125 1.5-2.5 0-2.313 1.503-3.696 2-4.5.385.99.5 2.5.5 4a8 8 0 1 1-12.5-1.5"/></svg>;
-
             if (name === 'ShoppingBag') return <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>;
-
             if (name === 'Menu') return <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round" className={className}><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>;
-
             if (name === 'X') return <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>;
-
             if (name === 'Star') return <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round" className={className}><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>;
-
-            if (name === 'Sparkles') return <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round" className={className}><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M9 5H5"/><path d="M3 7.5v.5"/></svg>;
-
+            if (name === 'Sparkles') return <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round" className={className}><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L12 21l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M9 5H5"/><path d="M3 7.5v.5"/></svg>;
             return null;
-
         };
-
-
 
         const products = [
-
             {
-
                 id: 1,
-
                 name: "GHOSTED",
-
                 scent: "Kalte Pizza & Leere Versprechen",
-
                 price: 39.90,
-
                 tag: "Bestseller",
-
                 image: "./ghosted1.jpg", 
-
                 fallbackColor: "bg-purple-400",
-
                 description: "Riecht wie die Nachricht, die er dir nie geschrieben hat. Ein Hauch von Einsamkeit, maskiert mit Lavendel."
-
             },
-
             {
-
                 id: 2,
-
                 name: "HEISSI LUFT",
-
                 scent: "Absolut gar nichts (Unscented)",
-
                 price: 49.00,
-
                 tag: "Signature",
-
                 image: null,
-
                 fallbackColor: "bg-gray-200",
-
                 description: "Die ehrlichste Kerze der Welt. 100% transparentes Gel, 0% Duft, 100% Vibe. Du zahlst nur für das Design."
-
             },
-
             {
-
                 id: 3,
-
                 name: "BÜNZLI TEARS",
-
                 scent: "Fondue & Nachbarschaftsstreit",
-
                 price: 42.00,
-
                 tag: "Swiss Edition",
-
-                image: "./image_5.png", // HIER WURDE DAS NEUE BILD EINGEFÜGT
-
+                image: "./buenzli.jpg", // <--- HIER GEÄNDERT! Datei muss buenzli.jpg heißen!
                 fallbackColor: "bg-red-500",
-
                 description: "Der Duft von pünktlich gezahlten Rechnungen und frisch laminierten Beschwerdebriefen im Treppenhaus."
-
             },
-
             {
-
                 id: 4,
-
                 name: "DELULU",
-
                 scent: "Zuckerwatte & Realitätsverlust",
-
                 price: 35.50,
-
                 tag: "Trending",
-
                 image: null,
-
                 fallbackColor: "bg-pink-400",
-
                 description: "Für alle, die glauben, dass er sich ändern wird. Süß, klebrig und absolut toxisch."
-
             }
-
         ];
 
-
-
         const Button = ({ children, className, onClick, variant = 'primary' }) => {
-
             const baseStyle = "px-6 py-3 font-bold border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:translate-x-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all active:shadow-none active:translate-x-[4px] active:translate-y-[4px] uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer";
-
             
-
             const variants = {
-
                 primary: "bg-yellow-400 text-black",
-
                 secondary: "bg-white text-black",
-
                 dark: "bg-black text-white hover:bg-gray-900"
-
             };
 
-
-
             return (
-
                 <button onClick={onClick} className={`${baseStyle} ${variants[variant]} ${className}`}>
-
                 {children}
-
                 </button>
-
             );
-
         };
 
-
-
         const Marquee = () => (
-
             <div className="bg-black text-white py-2 overflow-hidden border-y-2 border-black whitespace-nowrap z-50 relative">
-
                 <div className="animate-marquee inline-block">
-
                 <span className="mx-4 text-sm font-mono font-bold">+++ KOSTENLOSER VERSAND AB 2 KERZEN +++</span>
-
                 <span className="mx-4 text-sm font-mono font-bold">+++ SCHWEIZER HANDARBEIT (WIRKLICH) +++</span>
-
                 <span className="mx-4 text-sm font-mono font-bold">+++ RIECHT BESSER ALS DEIN EX +++</span>
-
                 <span className="mx-4 text-sm font-mono font-bold">+++ 100% SOJA WACHS +++</span>
-
                 <span className="mx-4 text-sm font-mono font-bold">+++ NO BAD VIBES +++</span>
-
                 <span className="mx-4 text-sm font-mono font-bold">+++ KOSTENLOSER VERSAND AB 2 KERZEN +++</span>
-
                 </div>
-
             </div>
-
         );
 
-
-
         function App() {
-
             const [cartCount, setCartCount] = useState(0);
-
             const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-
-
             const addToCart = () => {
-
                 setCartCount(prev => prev + 1);
-
             };
 
-
-
             return (
-
                 <div className="min-h-screen bg-[#f0f0f0]">
-
                 
-
                 <Marquee />
 
-
-
                 {/* Navigation */}
-
                 <nav className="sticky top-0 z-40 bg-white border-b-2 border-black px-4 py-4 flex justify-between items-center">
-
                     
-
                     {/* LOGO */}
-
                     <div className="flex flex-col items-center justify-center group cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-
                         <div className="bg-red-600 p-3 border-[3px] border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] group-hover:translate-y-[1px] group-hover:translate-x-[1px] group-hover:shadow-none transition-all">
-
                             <Icon name="Flame" className="w-8 h-8 text-white" strokeWidth={2.5} />
-
                         </div>
-
                         <span className="text-xl font-black tracking-tighter uppercase italic mt-2 leading-none">
-
                             HEISSI LUFT.
-
                         </span>
-
                     </div>
-
                     
-
                     {/* MENÜ */}
-
                     <div className="hidden md:flex gap-8 font-bold text-sm uppercase tracking-widest">
-
                     <a href="#products" className="hover:bg-black hover:text-white px-2 transition-colors">Alle Kerzen</a>
-
                     <a href="#" className="hover:bg-black hover:text-white px-2 transition-colors">Why?</a>
-
                     <a href="#" className="hover:bg-black hover:text-white px-2 transition-colors">FAQ</a>
-
                     </div>
-
-
 
                     <div className="flex items-center gap-4">
-
                     <button className="relative p-2 border-2 border-black hover:bg-yellow-300 transition-colors" onClick={() => setCartCount(0)}>
-
                         <Icon name="ShoppingBag" className="w-6 h-6" />
-
                         {cartCount > 0 && (
-
                         <span className="absolute -top-4 -right-2 bg-red-500 text-white font-black text-xs w-6 h-6 flex items-center justify-center border-2 border-black rounded-full rotate-12">
-
                             {cartCount}
-
                         </span>
-
                         )}
-
                     </button>
-
                     <button className="md:hidden" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
-
                         {mobileMenuOpen ? <Icon name="X" /> : <Icon name="Menu" />}
-
                     </button>
-
                     </div>
-
                 </nav>
 
-
-
                 {/* Hero Section */}
-
                 <header className="relative w-full border-b-2 border-black bg-gray-900">
-
                     <div className="grid md:grid-cols-2">
-
                     <div className="p-8 md:p-16 flex flex-col justify-center bg-yellow-300 border-r-2 border-black relative overflow-hidden">
-
                         <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none" style={{backgroundImage: 'radial-gradient(circle, #000 1px, transparent 1px)', backgroundSize: '20px 20px'}}></div>
-
                         
-
                         <div className="relative z-10">
-
                             <div className="inline-block bg-white border-2 border-black px-4 py-1 mb-6 font-bold uppercase text-sm tracking-widest transform -rotate-2 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-
                             🇨🇭 Swiss Made & Mentally Unstable
-
                             </div>
-
                             <h1 className="text-5xl md:text-7xl lg:text-8xl font-black leading-none mb-6 tracking-tighter">
-
                             VIEL LÄRM UM <br/>
-
                             <span className="text-white text-stroke-black bg-black px-2 transform skew-x-12 inline-block">NICHTS.</span>
-
                             </h1>
-
                             <p className="text-xl font-bold mb-8 max-w-md bg-white/50 backdrop-blur-sm p-4 border-2 border-black border-dashed">
-
                             Der offizielle Duft von 'Gelesen' ohne Antwort. Riecht nach kalter Pizza, Lavendel und der Erkenntnis, dass er nicht mehr schreibt. Zünd sie an und move on.
-
                             </p>
-
                             
-
                             {/* Launch Formular START */}
-
                             <div className="w-full max-w-md mt-6">
-
                                 <p className="text-sm font-bold uppercase mb-2 tracking-widest text-red-600">
-
                                     Launch Alert: Trag dich ein!
-
                                 </p>
-
                                 <iframe
-
                                     width="540"
-
                                     height="500"
-
                                     src="https://cde3e443.sibforms.com/serve/MUIFACjwhVF5aPqWUSUpm5NvNIC0e3wM8QukFLq3NYEdHYdMVes2pEukc9_s4Eqt7gL825vnhw20MhjyV2FF_rOuKMRJOwEq780KfAwcIkD042SQl8uzFfDvhlvRmuAqP1jR6RR5NUgMOCiIsEy2tBZqDlKjIY9-DMuVvpOglO6mwXTqA_Zm15udKE3A_HSTpzP6_u6DsN175-Gkgw=="
-
                                     frameBorder="0"
-
                                     scrolling="auto"
-
                                     allowFullScreen
-
                                     style={{
-
                                         display: 'block',
-
                                         marginLeft: '0',
-
                                         maxWidth: '100%',
-
                                         backgroundColor: 'transparent',
-
                                         border: '2px solid black'
-
                                     }}
-
                                 ></iframe>
-
                             </div>
-
                             {/* Launch Formular ENDE */}
-
                             
-
                         </div>
-
                     </div>
-
-
 
                     {/* HERO IMAGE: GHOSTED */}
-
                     <div className="relative h-[500px] md:h-auto border-t-2 md:border-t-0 border-black overflow-hidden group">
-
                         <img 
-
                             src="./ghosted1.jpg" 
-
                             alt="Ghosted Candle Mood" 
-
                             className="w-full h-full object-cover object-center grayscale hover:grayscale-0 transition-all duration-500"
-
                         />
-
                         <div className="absolute bottom-8 left-8 bg-white border-2 border-black p-4 transform rotate-2 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] z-10">
-
                             <p className="font-black uppercase text-xl text-purple-600">The Ghosted Edition</p>
-
                             <p className="font-mono text-xs">Bestseller • CHF 39.90</p>
-
                         </div>
-
                     </div>
-
                     </div>
-
                 </header>
 
-
-
                 {/* Running Banner */}
-
                 <div className="bg-red-500 py-4 border-b-2 border-black overflow-hidden">
-
                     <div className="animate-marquee whitespace-nowrap">
-
                         <span className="text-2xl md:text-4xl font-black text-white uppercase italic tracking-tighter mx-4">
-
                         "Endlich Kerzen, die meine Mood Swings verstehen" - Anna, 23 +++ "Riecht wie Geld, das ich nicht habe" - Kevin, 19 +++ "Besser als Therapie" - Sarah, 25
-
                         </span>
-
                     </div>
-
                 </div>
-
-
 
                 {/* Products Section */}
-
                 <section id="products" className="py-20 px-4 max-w-7xl mx-auto bg-white border-x-2 border-black">
-
                     <div className="flex justify-between items-end mb-16 border-b-4 border-black pb-4">
-
                     <h2 className="text-5xl md:text-7xl font-black uppercase tracking-tighter">THE COLLECTION</h2>
-
                     <div className="hidden md:block text-right">
-
                         <p className="font-bold font-mono bg-black text-white px-2 py-1 rotate-2">STOCK: CRITICAL</p>
-
                     </div>
-
                     </div>
-
-
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-
                     {products.map((product) => (
-
                         <div key={product.id} className="brutalist-card bg-[#f8f8f8] flex flex-col h-full relative group pb-4 overflow-hidden">
-
                         
-
                         <div className="absolute top-4 left-4 z-20">
-
                             <span className="bg-yellow-400 border-2 border-black px-2 py-1 text-xs font-black uppercase shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
-
                             {product.tag}
-
                             </span>
-
                         </div>
-
-
 
                         {/* Product Image */}
-
                         <div className={`h-80 w-full border-b-2 border-dashed border-black ${product.fallbackColor || 'bg-white'} relative overflow-hidden flex items-center justify-center`}>
-
                             {product.image ? (
-
                             <img 
-
                                 src={product.image} 
-
                                 alt={product.name}
-
                                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-
                             />
-
                             ) : (
-
                             <div className="flex flex-col items-center justify-center h-full w-full">
-
                                 <div className="text-6xl animate-pulse">
-
                                 {product.id === 1 ? '👻' : product.id === 2 ? '💨' : product.id === 3 ? '🧀' : '🤡'}
-
                                 </div>
-
                                 <div className="absolute bottom-4 font-mono text-xs font-bold uppercase tracking-widest bg-white px-2 border border-black">
-
                                 Image coming soon
-
                                 </div>
-
                             </div>
-
                             )}
-
                         </div>
-
-
 
                         <div className="p-6 flex flex-col flex-grow relative z-20 bg-[#f8f8f8]">
-
                             <div className="flex justify-between items-start mb-2">
-
                             <h3 className="text-2xl font-black uppercase italic leading-none">{product.name}</h3>
-
                             <span className="font-mono font-bold text-lg bg-black text-white px-1 transform -rotate-2">
-
                                 {product.price}.-
-
                             </span>
-
                             </div>
-
                             <p className="font-mono text-xs mb-4 text-gray-500 uppercase tracking-widest border-b-2 border-black pb-2">
-
                             Scent: {product.scent}
-
                             </p>
-
                             <p className="text-sm font-bold mb-6 flex-grow leading-tight">
-
                             {product.description}
-
                             </p>
-
                             
-
                             <Button onClick={addToCart} className="w-full group-hover:bg-black group-hover:text-white transition-colors">
-
                             In den Warenkorb
-
                             </Button>
-
                         </div>
-
                         </div>
-
                     ))}
-
                     </div>
-
                 </section>
-
-
 
                 {/* UGC Section */}
-
                 <section className="py-20 bg-blue-500 border-y-2 border-black px-4 relative overflow-hidden">
-
                     <div className="absolute top-10 left-10 text-9xl opacity-20 rotate-12">🤪</div>
-
                     <div className="absolute bottom-10 right-10 text-9xl opacity-20 -rotate-12">🕯️</div>
 
-
-
                     <div className="max-w-4xl mx-auto text-center relative z-10">
-
                     <h2 className="text-4xl md:text-6xl font-black mb-12 bg-white inline-block px-8 py-2 border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] transform -rotate-2">
-
                         VIBE CHECK
-
                     </h2>
-
                     
-
                     <div className="grid md:grid-cols-3 gap-6 text-left">
-
                         <div className="bg-white p-6 border-2 border-black rotate-1 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-
                         <div className="flex gap-1 mb-2">
-
                             {[1,2,3,4,5].map(i => <Icon key={i} name="Star" size={16} className="text-black" />)}
-
                         </div>
-
                         <p className="font-bold text-sm leading-tight">"Endlich eine Kerze die zugibt, dass mein Leben ein Chaos ist. 10/10 would buy again."</p>
-
                         <div className="mt-4 flex items-center gap-2">
-
                             <div className="w-8 h-8 rounded-full bg-gray-200 border-2 border-black"></div>
-
                             <p className="font-mono text-xs uppercase text-gray-500">@sarah_be</p>
-
                         </div>
-
                         </div>
-
                         
-
                         <div className="bg-white p-6 border-2 border-black -rotate-2 z-10 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-
                             <div className="flex gap-1 mb-2">
-
                                 {[1,2,3,4,5].map(i => <Icon key={i} name="Star" size={16} className="text-black" />)}
-
                             </div>
-
                             <p className="font-bold text-sm leading-tight">"Riecht so gut, dass ich vergessen habe, dass ich Pleite bin. Schneller Versand!"</p>
-
                             <div className="mt-4 flex items-center gap-2">
-
                                 <div className="w-8 h-8 rounded-full bg-gray-200 border-2 border-black"></div>
-
                                 <p className="font-mono text-xs uppercase text-gray-500">@kev_in_zurich</p>
-
                             </div>
-
                         </div>
-
-
 
                          <div className="bg-white p-6 border-2 border-black rotate-3 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-
                             <div className="flex gap-1 mb-2">
-
                                 {[1,2,3,4,5].map(i => <Icon key={i} name="Star" size={16} className="text-black" />)}
-
                             </div>
-
                             <p className="font-bold text-sm leading-tight">"Das perfekte Geschenk für Leute, die schon alles hassen."</p>
-
                             <div className="mt-4 flex items-center gap-2">
-
                                 <div className="w-8 h-8 rounded-full bg-gray-200 border-2 border-black"></div>
-
                                 <p className="font-mono text-xs uppercase text-gray-500">@elena.m</p>
-
                             </div>
-
                         </div>
-
                     </div>
-
                     </div>
-
                 </section>
 
-
-
                 <footer className="bg-black text-white py-12 px-4">
-
                     <div className="max-w-7xl mx-auto grid md:grid-cols-4 gap-8">
-
                     <div className="col-span-2">
-
                         <h2 className="text-4xl font-black italic mb-4">HEISSI LUFT.</h2>
-
                         <p className="font-bold max-w-sm">
-
                         Wir machen Kerzen für Leute, die Ironie verstehen. <br/>
-
                         Handmade in Switzerland.
-
                         </p>
-
                     </div>
-
                     
-
                     <div>
-
                         <h3 className="font-mono text-yellow-400 mb-4 uppercase">Links</h3>
-
                         <ul className="space-y-2 font-bold text-sm">
-
                         <li><a href="#" className="hover:text-yellow-400">Shop</a></li>
-
                         <li><a href="#" className="hover:text-yellow-400">Shipping (nur CH/DE/AT)</a></li>
-
                         <li><a href="#" className="hover:text-yellow-400">Impressum</a></li>
-
                         <li><a href="#" className="hover:text-yellow-400">Datenschutz</a></li>
-
                         </ul>
-
                     </div>
-
-
 
                     <div>
-
                         <h3 className="font-mono text-yellow-400 mb-4 uppercase">Newsletter</h3>
-
                         <p className="text-xs mb-4">Kein Spam, nur Vibe Checks & Rabatte.</p>
-
                         <div className="flex gap-2">
-
                         <input type="email" placeholder="Mail..." className="bg-white text-black p-2 w-full font-bold border-2 border-white focus:outline-none" />
-
                         <button className="bg-yellow-400 text-black px-4 font-bold hover:bg-yellow-300">→</button>
-
                         </div>
-
                     </div>
-
                     </div>
-
                     <div className="max-w-7xl mx-auto mt-12 pt-8 border-t border-gray-800 flex justify-between items-center text-xs font-mono text-gray-500">
-
                     <p>© 2024 HEISSI LUFT.</p>
-
                     <div className="flex gap-4">
-
                         <span>INSTAGRAM</span>
-
                         <span>TIKTOK</span>
-
                     </div>
-
                     </div>
-
                 </footer>
 
-
-
                 </div>
-
             );
-
         }
 
-
-
         const root = ReactDOM.createRoot(document.getElementById('root'));
-
         root.render(<App />);
-
-    </script></body></html>
+    </script>
+</body>
+</html>
