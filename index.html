@@ -64,16 +64,14 @@
 
         const products = [
             {
-               {
                 id: 1,
                 name: "GHOSTED",
                 scent: "Kalte Pizza & Leere Versprechen",
                 price: 39.90,
                 tag: "Bestseller",
-                image: "./ghosted1.jpg",  // <--- Hier haben wir das Bild verlinkt!
+                image: "./ghosted1.jpg", 
                 fallbackColor: "bg-purple-400",
                 description: "Riecht wie die Nachricht, die er dir nie geschrieben hat. Ein Hauch von Einsamkeit, maskiert mit Lavendel."
-            },
             },
             {
                 id: 2,
@@ -81,7 +79,7 @@
                 scent: "Absolut gar nichts (Unscented)",
                 price: 49.00,
                 tag: "Signature",
-                image: null, // HIER später dein Bild rein: "./signature.jpg"
+                image: null,
                 fallbackColor: "bg-gray-200",
                 description: "Die ehrlichste Kerze der Welt. 100% transparentes Gel, 0% Duft, 100% Vibe. Du zahlst nur für das Design."
             },
@@ -198,38 +196,39 @@
                             Weil dein Leben schon kompliziert genug riecht.
                             </p>
                             
-<div className="w-full max-w-md mt-6">
-    <p className="text-sm font-bold uppercase mb-2 tracking-widest text-red-600">
-        Launch Alert: Trag dich ein!
-    </p>
-    <iframe
-        width="540"
-        height="500"
-        src="https://cde3e443.sibforms.com/serve/MUIFACjwhVF5aPqWUSUpm5NvNIC0e3wM8QukFLq3NYEdHYdMVes2pEukc9_s4Eqt7gL825vnhw20MhjyV2FF_rOuKMRJOwEq780KfAwcIkD042SQl8uzFfDvhlvRmuAqP1jR6RR5NUgMOCiIsEy2tBZqDlKjIY9-DMuVvpOglO6mwXTqA_Zm15udKE3A_HSTpzP6_u6DsN175-Gkgw=="
-        frameBorder="0"
-        scrolling="auto"
-        allowFullScreen
-        style={{
-            display: 'block',
-            marginLeft: '0',
-            maxWidth: '100%',
-            backgroundColor: 'transparent',
-            border: '2px solid black' // Optional: Passt zum Brutalist Style
-        }}
-    ></iframe>
-</div>
+                            {/* Launch Formular START */}
+                            <div className="w-full max-w-md mt-6">
+                                <p className="text-sm font-bold uppercase mb-2 tracking-widest text-red-600">
+                                    Launch Alert: Trag dich ein!
+                                </p>
+                                <iframe
+                                    width="540"
+                                    height="500"
+                                    src="https://cde3e443.sibforms.com/serve/MUIFACjwhVF5aPqWUSUpm5NvNIC0e3wM8QukFLq3NYEdHYdMVes2pEukc9_s4Eqt7gL825vnhw20MhjyV2FF_rOuKMRJOwEq780KfAwcIkD042SQl8uzFfDvhlvRmuAqP1jR6RR5NUgMOCiIsEy2tBZqDlKjIY9-DMuVvpOglO6mwXTqA_Zm15udKE3A_HSTpzP6_u6DsN175-Gkgw=="
+                                    frameBorder="0"
+                                    scrolling="auto"
+                                    allowFullScreen
+                                    style={{
+                                        display: 'block',
+                                        marginLeft: '0',
+                                        maxWidth: '100%',
+                                        backgroundColor: 'transparent',
+                                        border: '2px solid black'
+                                    }}
+                                ></iframe>
+                            </div>
+                            {/* Launch Formular ENDE */}
                             
                         </div>
                     </div>
-<div className="relative h-[500px] md:h-auto border-t-2 md:border-t-0 border-black overflow-hidden group">
-                        {/* Das Bild - WICHTIG: ghosted1.jpg muss auf GitHub liegen */}
+
+                    {/* HERO IMAGE: GHOSTED */}
+                    <div className="relative h-[500px] md:h-auto border-t-2 md:border-t-0 border-black overflow-hidden group">
                         <img 
                             src="./ghosted1.jpg" 
                             alt="Ghosted Candle Mood" 
                             className="w-full h-full object-cover object-center grayscale hover:grayscale-0 transition-all duration-500"
                         />
-                        
-                        {/* Der Info-Sticker unten links */}
                         <div className="absolute bottom-8 left-8 bg-white border-2 border-black p-4 transform rotate-2 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] z-10">
                             <p className="font-black uppercase text-xl text-purple-600">The Ghosted Edition</p>
                             <p className="font-mono text-xs">Bestseller • CHF 39.90</p>
@@ -266,7 +265,7 @@
                             </span>
                         </div>
 
-                        {/* Product Image Placeholder */}
+                        {/* Product Image */}
                         <div className={`h-80 w-full border-b-2 border-dashed border-black ${product.fallbackColor || 'bg-white'} relative overflow-hidden flex items-center justify-center`}>
                             {product.image ? (
                             <img 
@@ -325,84 +324,4 @@
                             {[1,2,3,4,5].map(i => <Icon key={i} name="Star" size={16} className="text-black" />)}
                         </div>
                         <p className="font-bold text-sm leading-tight">"Endlich eine Kerze die zugibt, dass mein Leben ein Chaos ist. 10/10 would buy again."</p>
-                        <div className="mt-4 flex items-center gap-2">
-                            <div className="w-8 h-8 rounded-full bg-gray-200 border-2 border-black"></div>
-                            <p className="font-mono text-xs uppercase text-gray-500">@sarah_be</p>
-                        </div>
-                        </div>
-                        
-                        <div className="bg-white p-6 border-2 border-black -rotate-2 z-10 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-                            <div className="flex gap-1 mb-2">
-                                {[1,2,3,4,5].map(i => <Icon key={i} name="Star" size={16} className="text-black" />)}
-                            </div>
-                            <p className="font-bold text-sm leading-tight">"Riecht so gut, dass ich vergessen habe, dass ich Pleite bin. Schneller Versand!"</p>
-                            <div className="mt-4 flex items-center gap-2">
-                                <div className="w-8 h-8 rounded-full bg-gray-200 border-2 border-black"></div>
-                                <p className="font-mono text-xs uppercase text-gray-500">@kev_in_zurich</p>
-                            </div>
-                        </div>
-
-                         <div className="bg-white p-6 border-2 border-black rotate-3 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-                            <div className="flex gap-1 mb-2">
-                                {[1,2,3,4,5].map(i => <Icon key={i} name="Star" size={16} className="text-black" />)}
-                            </div>
-                            <p className="font-bold text-sm leading-tight">"Das perfekte Geschenk für Leute, die schon alles hassen."</p>
-                            <div className="mt-4 flex items-center gap-2">
-                                <div className="w-8 h-8 rounded-full bg-gray-200 border-2 border-black"></div>
-                                <p className="font-mono text-xs uppercase text-gray-500">@elena.m</p>
-                            </div>
-                        </div>
-                    </div>
-                    </div>
-                </section>
-
-                <footer className="bg-black text-white py-12 px-4">
-                    <div className="max-w-7xl mx-auto grid md:grid-cols-4 gap-8">
-                    <div className="col-span-2">
-                        <h2 className="text-4xl font-black italic mb-4">HEISSI LUFT.</h2>
-                        <p className="font-bold max-w-sm">
-                        Wir machen Kerzen für Leute, die Ironie verstehen. <br/>
-                        Handmade in Switzerland.
-                        </p>
-                    </div>
-                    
-                    <div>
-                        <h3 className="font-mono text-yellow-400 mb-4 uppercase">Links</h3>
-                        <ul className="space-y-2 font-bold text-sm">
-                        <li><a href="#" className="hover:text-yellow-400">Shop</a></li>
-                        <li><a href="#" className="hover:text-yellow-400">Shipping (nur CH/DE/AT)</a></li>
-                        <li><a href="#" className="hover:text-yellow-400">Impressum</a></li>
-                        <li><a href="#" className="hover:text-yellow-400">Datenschutz</a></li>
-                        </ul>
-                    </div>
-
-                    <div>
-                        <h3 className="font-mono text-yellow-400 mb-4 uppercase">Newsletter</h3>
-                        <p className="text-xs mb-4">Kein Spam, nur Vibe Checks & Rabatte.</p>
-                        <div className="flex gap-2">
-                        <input type="email" placeholder="Mail..." className="bg-white text-black p-2 w-full font-bold border-2 border-white focus:outline-none" />
-                        <button className="bg-yellow-400 text-black px-4 font-bold hover:bg-yellow-300">→</button>
-                        </div>
-                    </div>
-                    </div>
-                    <div className="max-w-7xl mx-auto mt-12 pt-8 border-t border-gray-800 flex justify-between items-center text-xs font-mono text-gray-500">
-                    <p>© 2024 HEISSI LUFT.</p>
-                    <div className="flex gap-4">
-                        <span>INSTAGRAM</span>
-                        <span>TIKTOK</span>
-                    </div>
-                    </div>
-                </footer>
-
-                </div>
-            );
-        }
-
-        const root = ReactDOM.createRoot(document.getElementById('root'));
-        root.render(<App />);
-    </script>
-</body>
-</html>
-
-
-
+                        <div className="mt-4 flex items
