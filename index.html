@@ -58,7 +58,7 @@
             if (name === 'Menu') return <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round" className={className}><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>;
             if (name === 'X') return <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>;
             if (name === 'Star') return <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round" className={className}><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>;
-            if (name === 'Sparkles') return <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round" className={className}><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L12 21l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M9 5H5"/><path d="M3 7.5v.5"/></svg>;
+            if (name === 'Sparkles') return <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round" className={className}><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M9 5H5"/><path d="M3 7.5v.5"/></svg>;
             return null;
         };
 
@@ -79,7 +79,7 @@
                 scent: "Absolut gar nichts (Unscented)",
                 price: 49.00,
                 tag: "Signature",
-                image: null,
+                image: "./heissiluft.jpg", // <--- HIER IST DAS NEUE BILD VERLINKT (Du musst es noch hochladen!)
                 fallbackColor: "bg-gray-200",
                 description: "Die ehrlichste Kerze der Welt. 100% transparentes Gel, 0% Duft, 100% Vibe. Du zahlst nur für das Design."
             },
@@ -89,7 +89,7 @@
                 scent: "Fondue & Nachbarschaftsstreit",
                 price: 42.00,
                 tag: "Swiss Edition",
-                image: "./buenzli.jpg", // <--- HIER GEÄNDERT! Datei muss buenzli.jpg heißen!
+                image: "./unnamed (1).jpg", 
                 fallbackColor: "bg-red-500",
                 description: "Der Duft von pünktlich gezahlten Rechnungen und frisch laminierten Beschwerdebriefen im Treppenhaus."
             },
@@ -373,36 +373,4 @@
                         <h3 className="font-mono text-yellow-400 mb-4 uppercase">Links</h3>
                         <ul className="space-y-2 font-bold text-sm">
                         <li><a href="#" className="hover:text-yellow-400">Shop</a></li>
-                        <li><a href="#" className="hover:text-yellow-400">Shipping (nur CH/DE/AT)</a></li>
-                        <li><a href="#" className="hover:text-yellow-400">Impressum</a></li>
-                        <li><a href="#" className="hover:text-yellow-400">Datenschutz</a></li>
-                        </ul>
-                    </div>
-
-                    <div>
-                        <h3 className="font-mono text-yellow-400 mb-4 uppercase">Newsletter</h3>
-                        <p className="text-xs mb-4">Kein Spam, nur Vibe Checks & Rabatte.</p>
-                        <div className="flex gap-2">
-                        <input type="email" placeholder="Mail..." className="bg-white text-black p-2 w-full font-bold border-2 border-white focus:outline-none" />
-                        <button className="bg-yellow-400 text-black px-4 font-bold hover:bg-yellow-300">→</button>
-                        </div>
-                    </div>
-                    </div>
-                    <div className="max-w-7xl mx-auto mt-12 pt-8 border-t border-gray-800 flex justify-between items-center text-xs font-mono text-gray-500">
-                    <p>© 2024 HEISSI LUFT.</p>
-                    <div className="flex gap-4">
-                        <span>INSTAGRAM</span>
-                        <span>TIKTOK</span>
-                    </div>
-                    </div>
-                </footer>
-
-                </div>
-            );
-        }
-
-        const root = ReactDOM.createRoot(document.getElementById('root'));
-        root.render(<App />);
-    </script>
-</body>
-</html>
+                        <li>
